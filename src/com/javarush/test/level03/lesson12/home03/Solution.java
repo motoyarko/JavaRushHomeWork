@@ -16,6 +16,6 @@ public class Solution
         String bufferReader = bufferedReader.readLine();
         int cash = Integer.parseInt(bufferReader);
         System.out.println("Я буду зарабатывать $" + cash + " в час");
-
+test again;
     }
 }
