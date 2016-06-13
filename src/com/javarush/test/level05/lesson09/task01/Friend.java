@@ -9,10 +9,9 @@ package com.javarush.test.level05.lesson09.task01;
 
 public class Friend
 {
-<<<<<<< HEAD
-    //напишите тут ваш код
 
-=======
+
+
     public String name, gender;
     public int age;
 
@@ -34,5 +33,5 @@ public class Friend
         this.name = name;
         this.gender = gender;
     }
->>>>>>> origin/master
+
 }
