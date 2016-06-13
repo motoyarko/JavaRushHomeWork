@@ -6,13 +6,15 @@ package com.javarush.test.level05.lesson12.home03;
 Mouse jerryMouse = new Mouse(“Jerry”, 12 , 5), где 12 - высота в см, 5 - длина хвоста в см.
 */
 
+import sun.security.x509.CertificateX509Key;
+
 public class Solution
 {
     public static void main(String[] args)
     {
         Mouse jerryMouse = new Mouse("Jerry", 12 , 5);
-
-        //напишите тут ваш код
+        Dog bullDog = new Dog("bullDog", 50, 2);
+        Cat cat = new Cat("Tomm", 30, 15);
     }
 
     public static class Mouse
@@ -29,6 +31,32 @@ public class Solution
         }
     }
 
-    //добавьте тут ваши классы
+    public static class Dog
+    {
+        String name;
+        int height;
+        int tail;
+
+        public Dog(String name, int height, int tail)
+        {
+            this.name = name;
+            this.height = height;
+            this.tail = tail;
+        }
+    }
+
+    public static class Cat
+    {
+        String name;
+        int height;
+        int tail;
+
+        public Cat(String name, int height, int tail)
+        {
+            this.name = name;
+            this.height = height;
+            this.tail = tail;
+        }
+    }
 
 }
