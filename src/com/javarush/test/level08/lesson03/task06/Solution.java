@@ -25,15 +25,15 @@ public class Solution
         map.put("Food", new Character('3'));
         map.put("Gevey", '6');
         map.put("Hugs", 111111111111L);
-        map.put("Comp", (double)123);
+        map.put("Comp", (double) 123);
 
         Iterator<Map.Entry<String, Object>> iterator = map.entrySet().iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext())
+        {
             Map.Entry<String, Object> out = iterator.next();
             String key = out.getKey();
             Object value = out.getValue();
             System.out.println(key + " - " + value);
         }
-
     }
 }
