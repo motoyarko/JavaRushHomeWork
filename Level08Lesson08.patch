@@ -1,0 +1,282 @@
+Index: src/com/javarush/test/level08/lesson08/task02/Solution.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/javarush/test/level08/lesson08/task02/Solution.java	(revision )
++++ src/com/javarush/test/level08/lesson08/task02/Solution.java	(revision )
+@@ -0,0 +1,35 @@
++package com.javarush.test.level08.lesson08.task02;
++
++import java.util.HashSet;
++import java.util.Iterator;
++import java.util.Objects;
++import java.util.Set;
++
++/* Удалить все числа больше 10
++Создать множество чисел(Set<Integer>), занести туда 20 различных чисел.
++Удалить из множества все числа больше 10.
++*/
++
++public class Solution
++{
++    public static HashSet<Integer> createSet()
++    {
++        HashSet<Integer> integers = new HashSet<Integer>();
++        for (int i = 0; i < 20; i++)integers.add(i);
++
++        return integers;
++
++    }
++
++    public static HashSet<Integer> removeAllNumbersMoreThan10(HashSet<Integer> set)
++    {
++        Iterator<Integer> iterator = set.iterator();
++
++            while (iterator.hasNext()){
++                if (iterator.next() > 10)iterator.remove();
++            }
++
++        return set;
++
++    }
++}
+Index: src/com/javarush/test/level08/lesson08/task04/Solution.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/javarush/test/level08/lesson08/task04/Solution.java	(revision )
++++ src/com/javarush/test/level08/lesson08/task04/Solution.java	(revision )
+@@ -0,0 +1,55 @@
++package com.javarush.test.level08.lesson08.task04;
++
++import java.util.Date;
++import java.util.HashMap;
++import java.util.Iterator;
++import java.util.Map;
++
++/* Удалить всех людей, родившихся летом
++Создать словарь (Map<String, Date>) и занести в него десять записей по принципу: «фамилия» - «дата рождения».
++Удалить из словаря всех людей, родившихся летом.
++*/
++
++public class Solution
++{
++    public static void main(String[] Args){
++
++        HashMap<String, Date> map = createMap();
++        removeAllSummerPeople(map);
++
++
++    }
++    public static HashMap<String, Date> createMap()
++    {
++        HashMap<String, Date> map = new HashMap<String, Date>();
++        map.put("Stallone1", new Date("JULY 1 1980"));
++        map.put("Stallone2", new Date("JULY 1 1982"));
++        map.put("Stallone3", new Date("JUNE 1 1983"));
++        map.put("Stallone4", new Date("OCTOBER 1 1984"));
++        map.put("Stallone5", new Date("AUGUST 1 1986"));
++        map.put("Stallone6", new Date("JULY 1 1988"));
++        map.put("Stallone7", new Date("MARCH 1 1981"));
++        map.put("Stallone8", new Date("JANUARY 1 1980"));
++        map.put("Stallone9", new Date("DECEMBER 1 1980"));
++        map.put("Stallone10", new Date("OCTOBER 1 1980"));
++
++
++
++        return map;
++
++    }
++
++    public static void removeAllSummerPeople(HashMap<String, Date> map)
++    {
++        Iterator<Map.Entry<String, Date>> iterator = map.entrySet().iterator();
++        while (iterator.hasNext()){
++            Map.Entry<String, Date> pair = iterator.next();
++           Date date = pair.getValue();
++            if((date.getMonth() == 5) || (date.getMonth() == 6) || (date.getMonth() == 7)) iterator.remove();
++
++        }
++
++
++
++    }
++}
+Index: src/com/javarush/test/level08/lesson08/task03/Solution.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/javarush/test/level08/lesson08/task03/Solution.java	(revision )
++++ src/com/javarush/test/level08/lesson08/task03/Solution.java	(revision )
+@@ -0,0 +1,65 @@
++package com.javarush.test.level08.lesson08.task03;
++
++import java.util.HashMap;
++import java.util.HashSet;
++import java.util.Iterator;
++import java.util.Map;
++
++/* Одинаковые имя и фамилия
++Создать словарь (Map<String, String>) занести в него десять записей по принципу «Фамилия» - «Имя».
++Проверить сколько людей имеют совпадающие с заданным имя или фамилию.
++*/
++
++public class Solution
++{
++    public static void main(String[] Args)
++    {
++
++        System.out.println(getCountTheSameFirstName(createMap(), "Александр"));
++        System.out.println(getCountTheSameLastName(createMap(), "Андреев"));
++    }
++
++
++        public static HashMap<String, String> createMap()
++        {
++            HashMap<String, String> hashMap = new HashMap<String, String>();
++            hashMap.put("Андреев", "Александр");
++            hashMap.put("Аседова", "Елизавета");
++            hashMap.put("Валинуров", "Александр");
++            hashMap.put("Гаранян", "Елизавета");
++            hashMap.put("Горинова", "Александр");
++            hashMap.put("Ермохин", "Елизавета");
++            hashMap.put("Иванов", "Александр");
++            hashMap.put("Ильин", "Елизавета");
++            hashMap.put("Капитонов", "Александр");
++            hashMap.put("Клинова", "Елизавета");
++            return hashMap;
++        }
++
++    public static int getCountTheSameFirstName(HashMap<String, String> map, String name)
++    {
++        int count = 0;
++        Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
++        while (iterator.hasNext())
++        {
++            Map.Entry<String, String> pair = iterator.next();
++            String value = pair.getValue();
++            if (value.equals(name)) count++;
++        }
++        return count;
++    }
++
++    public static int getCountTheSameLastName(HashMap<String, String> map, String lastName)
++    {
++        int count2 = 0;
++        Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
++        while (iterator.hasNext())
++        {
++            Map.Entry<String, String> pair = iterator.next();
++            String key = pair.getKey();
++            if (key.equals(lastName)) count2++;
++        }
++        return count2;
++
++    }
++}
+Index: src/com/javarush/test/level08/lesson08/task05/Solution.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/javarush/test/level08/lesson08/task05/Solution.java	(revision )
++++ src/com/javarush/test/level08/lesson08/task05/Solution.java	(revision )
+@@ -0,0 +1,64 @@
++package com.javarush.test.level08.lesson08.task05;
++
++import java.util.*;
++
++/* Удалить людей, имеющих одинаковые имена
++Создать словарь (Map<String, String>) занести в него десять записей по принципу «фамилия» - «имя».
++Удалить людей, имеющих одинаковые имена.
++*/
++
++public class Solution
++{
++    public static void main(String[] Args){
++        //System.out.println(createMap());
++
++        removeTheFirstNameDuplicates(createMap());
++
++    }
++    public static HashMap<String, String> createMap()
++    {
++        HashMap<String, String> createMap= new HashMap<String, String>();
++        createMap.put("Андреев", "Александр");
++        createMap.put("Аседова", "Елизавета");
++        createMap.put("Валинуров", "Vasya");
++        createMap.put("Гаранян", "Елизавета");
++        createMap.put("Горинова", "Александр");
++        createMap.put("Ермохин", "Елизавета");
++        createMap.put("Иванов", "Александр");
++        createMap.put("Ильин", "Елизавета");
++        createMap.put("Капитонов", "Александр");
++        createMap.put("Клинова", "Елизавета");
++        return createMap;
++
++    }
++
++    public static void removeTheFirstNameDuplicates(HashMap<String, String> map)
++    {
++        ArrayList<String> doubleNames = new ArrayList<String>();
++        HashMap<String, String> copyOfMap = new HashMap<String, String>(map);
++        /*copyOfMap = map;*/
++
++        for (Map.Entry<String, String> pair: copyOfMap.entrySet()){
++            if (Collections.frequency(copyOfMap.values(), pair.getValue()) > 1){
++                /*if (Collections.frequency(doubleNames, pair.getValue()) == 0)*/doubleNames.add(pair.getValue());
++            }
++        }
++       // System.out.println(doubleNames);
++
++        for (String doubleName: doubleNames)removeItemFromMapByValue(map, doubleName);
++
++
++
++    }
++
++    public static void removeItemFromMapByValue(HashMap<String, String> map, String value)
++    {
++        HashMap<String, String> copy = new HashMap<String, String>(map);
++        for (Map.Entry<String, String> pair: copy.entrySet())
++        {
++            if (pair.getValue().equals(value))
++                map.remove(pair.getKey());
++        }
++        System.out.println(map);
++    }
++}
+Index: src/com/javarush/test/level08/lesson08/task01/Solution.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/javarush/test/level08/lesson08/task01/Solution.java	(revision )
++++ src/com/javarush/test/level08/lesson08/task01/Solution.java	(revision )
+@@ -0,0 +1,22 @@
++package com.javarush.test.level08.lesson08.task01;
++
++
++import java.util.HashSet;
++import java.util.Set;
++
++/* 20 слов на букву «Л»
++Создать множество строк (Set<String>), занести в него 20 слов на букву «Л».
++*/
++
++public class Solution
++{
++    public static HashSet<String> createSet()
++    {
++        HashSet<String> list = new HashSet<String>();
++        for (int i = 0; i < 20; i++)
++        {
++            list.add("Лось " + i);
++        }
++        return list;
++    }
++}
+\ No newline at end of file
