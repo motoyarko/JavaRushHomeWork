@@ -16,9 +16,20 @@ public class Solution
 {
     public static void main(String[] args) throws Exception
     {
-        //напишите тут ваш код
+        try
+        {
+            method1();
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println(e);
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println(e);
+        }
 
-        method1();
+
 
         //напишите тут ваш код
 
