@@ -1,6 +1,7 @@
 package com.javarush.test.level09.lesson11.home03;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,30 @@ public class Solution
     }
 
     public static void readData() {
-        //напишите тут ваш код
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        try
+        {
+            while(true)
+            {
+                arrayList.add(Integer.parseInt(bufferedReader.readLine()));
+            }
+
+        }
+
+        catch (NumberFormatException e)
+        {
+            for (Integer i : arrayList)
+            {
+                System.out.println(i);
+            }
+        }
+        catch (IOException e)
+        {
+            for (Integer i : arrayList)
+            {
+                System.out.println(i);
+            }
+        }
     }
 }
