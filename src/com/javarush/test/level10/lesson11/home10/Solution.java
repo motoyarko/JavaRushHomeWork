@@ -30,7 +30,16 @@ public class Solution
 
     public static int safeGetElement(ArrayList<Integer> list, int index, int defaultValue)
     {
-      //напишите тут ваш код
+        int out;
+        try
+        {
+            out = list.get(index);
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            out = defaultValue;
+        }
+        return out;
     }
 
 }
