@@ -29,12 +29,31 @@ public class Solution
 
         sort(array);
 
+
         System.out.println(array[9]);
         System.out.println(array[10]);
     }
 
     public static void sort(int[] array)
     {
-        //напишите тут ваш код
+
+        int i, j, k, h, m=0, b=array.length;
+        int[] d = { 1, 4, 10, 23, 57, 145, 356, 911, 1968, 4711, 11969, 27901,
+                84801, 213331, 543749, 1355339, 3501671, 8810089, 21521774,
+                58548857, 157840433, 410151271, 1131376761, 2147483647 };
+        while (d[m] < b) ++m;
+        while (--m >= 0){
+            k = d[m];
+            for (i = k; i < b; i++){     // k-сортировка
+                j=i;
+                h=array[i];
+                while ((j >= k) && (array[j-k] > h)){
+                    array[j]=array[j-k];
+                    j -= k;
+                }
+                array[j] = h;
+            }
+        }
     }
 }
+
