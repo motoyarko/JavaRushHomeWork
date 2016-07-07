@@ -13,8 +13,8 @@ public class BelarusianHen extends Hen
     }
     public String getDescription()
     {
+        String out = (super.getDescription() + " Моя страна - " + Country.BELARUS + ". Я несу " + this.getCountOfEggsPerMonth() + " яиц в месяц.");
 
-
-        return "";
+        return out;
     }
 }

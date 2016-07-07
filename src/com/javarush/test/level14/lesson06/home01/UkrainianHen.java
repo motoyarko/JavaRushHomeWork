@@ -11,4 +11,10 @@ public class UkrainianHen extends Hen
     {
         return 100;
     }
+    public String getDescription()
+    {
+        String out = (super.getDescription() + " Моя страна - " + Country.UKRAINE + ". Я несу " + this.getCountOfEggsPerMonth() + " яиц в месяц.");
+
+        return out;
+    }
 }

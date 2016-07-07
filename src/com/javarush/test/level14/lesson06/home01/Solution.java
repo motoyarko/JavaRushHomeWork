@@ -31,6 +31,7 @@ public class Solution
     {
         Hen hen = HenFactory.getHen(Country.BELARUS);
         hen.getCountOfEggsPerMonth();
+
     }
 
     static class HenFactory
