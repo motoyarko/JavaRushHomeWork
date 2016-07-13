@@ -26,71 +26,59 @@ double 3.14
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Solution
 {
-
-    private static List<String> valuesList = new LinkedList<>();
-    private static List<String> paramsList = new LinkedList<>();
-
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        String link = bufferedReader.readLine();
-        char[] charArray = link.toCharArray();
-        for (int i = 0; i < charArray.length; i++)
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try
         {
-            if (((charArray[i] == '?') || (charArray[i] == '&')) && ((i + 1) < charArray.length))
+            String url = reader.readLine();
+            reader.close();
+            String s = url.substring(url.indexOf("?") + 1);
+            String[] m = s.split("&");
+            List<String> values = new ArrayList<>();
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < m.length; i++)
             {
-                i++;
-                String tempString = "";
-                while ((i < charArray.length) && (charArray[i] != '=') && (charArray[i] != '&'))
+                if (m[i].contains("="))
                 {
-                    tempString += charArray[i];
-                    i++;
-                }
-                paramsList.add(tempString);
-                if (tempString.equals("obj")) getThisValue(charArray, i);
-                i--;
+                    String[] parvalue = m[i].split("=");
+                    if (parvalue[0].equals("obj"))
+                    {
+                        stringBuilder.append(parvalue[0] + " ");
+                        values.add(parvalue[1]);
+                    } else stringBuilder.append(parvalue[0] + " ");
+                } else if (m[i].equals("obj"))
+                {
+                    stringBuilder.append(m[i] + " ");
+                    values.add("");
+                } else stringBuilder.append(m[i] + " ");
             }
-        }
-
-        for (String s : paramsList)
-        {
-            System.out.print(s + " ");
-        }
-        System.out.println();
-
-        for (String s : valuesList)
-        {
+            System.out.print(stringBuilder.toString().trim() + '\n');
+            for (String v : values)
+            {
 
                 try
                 {
-                    alert(Double.parseDouble(s));
+                    alert(Double.parseDouble(v));
                 }
-                catch (Exception e)
+                catch (NumberFormatException e)
                 {
-                    alert(s);
+                    alert(v);
                 }
 
+            }
         }
-    }
-
-    private static void getThisValue(char[] charArray, int i)
-    {
-        int k = i + 1;
-        String tempString = "";
-        while ((k < charArray.length) && ((charArray[k] != '=') && (charArray[k] != '&')))
+        catch (IOException e)
         {
-            tempString += charArray[k];
-            k++;
+            System.out.println("IOException");
         }
-        valuesList.add(tempString);
     }
-
 
     public static void alert(double value)
     {
