@@ -53,7 +53,7 @@ public class Solution
                     i++;
                 }
                 paramsList.add(tempString);
-                if (tempString.startsWith("obj")) getThisValue(charArray, i);
+                if (tempString.equals("obj")) getThisValue(charArray, i);
                 i--;
             }
         }
