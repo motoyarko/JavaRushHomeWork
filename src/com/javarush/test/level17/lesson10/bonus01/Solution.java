@@ -1,9 +1,5 @@
 package com.javarush.test.level17.lesson10.bonus01;
 
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,47 +29,54 @@ id соответствует индексу в списке
 Пример параметров: -c Миронов м 15/04/1990
 */
 
-public class Solution
-{
+public class Solution {
     public static List<Person> allPeople = new ArrayList<Person>();
-
-    static
-    {
+    static {
         allPeople.add(Person.createMale("Иванов Иван", new Date()));  //сегодня родился    id=0
         allPeople.add(Person.createMale("Петров Петр", new Date()));  //сегодня родился    id=1
     }
 
-    public static void main(String[] args) throws IOException
-    {
-
-
+    public static void main(String[] args) {
         SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-
-        if (args[0].equals("-c"))
+        if(args.length>0)
         {
-            if (args[2].equals("ж"))
+            if (args[0].equals("-c") && args.length==4)
             {
-                allPeople.add(Person.createFemale(args[1], new Date(args[3])));
-            } else
-                allPeople.add(Person.createMale(args[1], new Date(args[3])));
-        }
-        if (args[0].equals("-u"))
-        {
-            if (args[3].equals("ж"))
+                if (args[2].equals("ж"))
+                {
+                    allPeople.add(Person.createFemale(args[1], new Date(args[3])));
+                } else
+                    allPeople.add(Person.createMale(args[1], new Date(args[3])));
+                System.out.println(allPeople.size()-1);
+            }
+            if (args[0].equals("-u") && args.length==5)
             {
-                allPeople.set(Integer.parseInt(args[1]), Person.createFemale(args[2], new Date(args[4])));
-            } else
-                allPeople.set(Integer.parseInt(args[1]), Person.createMale(args[2], new Date(args[4])));
-        }
-        if (args[0].equals("-d"))
-        {
-            allPeople.remove(Integer.parseInt(args[1]));
-        }
-        if (args[0].equals("-i"))
-        {
-            int id = Integer.parseInt(args[1]);
-            System.out.println(allPeople.get(id).getName() + " " + allPeople.get(id).getSex() + " " + date.format(allPeople.get(id).getBirthDay()));
-        }
+                if (args[3].equals("ж"))
+                {
+                    allPeople.set(Integer.parseInt(args[1]), Person.createFemale(args[2], new Date(args[4])));
+                } else
+                    allPeople.set(Integer.parseInt(args[1]), Person.createMale(args[2], new Date(args[4])));
+            }
+            if (args[0].equals("-d") && args.length==2)
+            {
+                if (allPeople.get(Integer.parseInt(args[1])).getSex().equals(Sex.FEMALE)){
 
+                        allPeople.set(Integer.parseInt(args[1]), Person.createFemale(null, null));
+                    } else
+                        allPeople.set(Integer.parseInt(args[1]), Person.createMale(null, null));
+                }
+            }
+            if (args[0].equals("-i") && args.length==2)
+            {
+                int id = Integer.parseInt(args[1]);
+                if (allPeople.get(id).getSex().equals(Sex.MALE))
+                {
+                    System.out.println(allPeople.get(id).getName() + " " + "м" + " " + date.format(allPeople.get(id).getBirthDay()));
+                } else
+                {
+                    System.out.println(allPeople.get(id).getName() + " " + "ж" + " " + date.format(allPeople.get(id).getBirthDay()));
+                }
+            }
+        }
     }
-}
+
