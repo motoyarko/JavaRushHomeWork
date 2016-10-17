@@ -18,10 +18,8 @@ f 361
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Set;
 
 public class Solution
 {
@@ -29,21 +27,28 @@ public class Solution
     {
         String fileName = args[0];
         FileReader fileReader = new FileReader(fileName);
-        HashMap<Byte, Integer> valuesMap = new HashMap<Byte, Integer>();
-        byte counter;
-        while ((counter = (byte) fileReader.read()) != 0){
-            if (valuesMap.containsKey(counter)){
+        HashMap<Integer, Integer> valuesMap = new HashMap<>();
+        int counter;
+        while ((counter = (byte) fileReader.read()) != -1)
+        {
+
+            if (valuesMap.containsKey(counter))
+            {
                 int oldValue = valuesMap.get(counter);
                 valuesMap.put(counter, oldValue + 1);
-            }else valuesMap.put(counter, 1);
+            } else valuesMap.put(counter, 1);
         }
         fileReader.close();
 
-        Byte[] b = (Byte[]) valuesMap.keySet().toArray();
+
+        Object[] b = valuesMap.keySet().toArray();
+
         Arrays.sort(b);
 
-        for (byte coun : b){
-            System.out.println(coun + " " + valuesMap.get(coun));
+        for (Object coun : b)
+        {
+
+            System.out.println((char) (int) coun + " " + valuesMap.get(coun));
         }
 
     }
