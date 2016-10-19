@@ -25,8 +25,6 @@ public class Solution
             new ReadThread(fileName).start();
         }
         bufferedReader.close();
-
-
     }
 
     public static class ReadThread extends Thread
@@ -63,26 +61,17 @@ public class Solution
                         maxValue = map.get(count);
                         maxKey = count;
                     }
-
                 }
-
-
-                synchronized (resultMap)
-                {
-                    resultMap.put(fileName, maxKey);
-                }
-
-
+                resultMap.put(fileName, maxKey);
             }
             catch (FileNotFoundException e)
             {
-                System.out.println("File not found");
+                e.printStackTrace();
             }
             catch (IOException e)
             {
-                System.out.println("IO Exception");
+                e.printStackTrace();
             }
         }
-
     }
 }
