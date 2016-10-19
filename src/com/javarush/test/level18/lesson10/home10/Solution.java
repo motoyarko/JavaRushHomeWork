@@ -13,7 +13,6 @@ package com.javarush.test.level18.lesson10.home10;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ListIterator;
 
 public class Solution
@@ -21,17 +20,24 @@ public class Solution
     public static void main(String[] args) throws IOException
     {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        List<String> fileList = new ArrayList<String>();
+        ArrayList<String> fileList = new ArrayList<String>(100);
+      for (int i = 0; i < 100; i++){
+          fileList.add(" ");
+      }
+        fileList.add(null);
         String fileName;
         while (!(fileName = bufferedReader.readLine()).equals("end"))
         {
-            int partNumber = Integer.parseInt(fileName.substring(fileName.lastIndexOf(".part")) + 5);
-            fileList.add(partNumber - 1, fileName);
+            int partStartIndex = Integer.parseInt(String.valueOf(fileName.lastIndexOf(".part")));
+            int partNumber = Integer.parseInt(fileName.substring(partStartIndex + 5));
+            fileList.set(partNumber - 1, fileName);
         }
         bufferedReader.close();
 
-        FileWriter fileWriter = new FileWriter(fileName.substring(0, fileName.lastIndexOf(".part")));
+        FileWriter fileWriter = new FileWriter("C:\\DEVELOP\\tmp\\лекции по тестированию.part11.rar");
+                //fileName.substring(0, Integer.parseInt(String.valueOf(fileName.lastIndexOf(".part")))));
         ListIterator<String> iter = fileList.listIterator();
+
         while (iter.hasNext()){
             FileReader fileReader = new FileReader(iter.next());
            int counter;
@@ -45,3 +51,16 @@ public class Solution
 
     }
 }
+//C:\DEVELOP\tmp\лекции по тестированию.part11
+/*
+C:\DEVELOP\tmp\лекции по тестированию.part11
+        C:\DEVELOP\tmp\лекции по тестированию.part10
+        C:\DEVELOP\tmp\лекции по тестированию.part09
+        C:\DEVELOP\tmp\лекции по тестированию.part08
+        C:\DEVELOP\tmp\лекции по тестированию.part07
+        C:\DEVELOP\tmp\лекции по тестированию.part06
+        C:\DEVELOP\tmp\лекции по тестированию.part05
+        C:\DEVELOP\tmp\лекции по тестированию.part04
+        C:\DEVELOP\tmp\лекции по тестированию.part03
+        C:\DEVELOP\tmp\лекции по тестированию.part02
+        C:\DEVELOP\tmp\лекции по тестированию.part01*/
