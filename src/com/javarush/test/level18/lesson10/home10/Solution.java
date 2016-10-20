@@ -12,55 +12,42 @@ package com.javarush.test.level18.lesson10.home10;
 */
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.ListIterator;
+import java.util.Iterator;
+import java.util.TreeSet;
+
 
 public class Solution
 {
     public static void main(String[] args) throws IOException
     {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        ArrayList<String> fileList = new ArrayList<String>(100);
-      for (int i = 0; i < 100; i++){
-          fileList.add(" ");
-      }
-        fileList.add(null);
+        TreeSet<String> fileList = new TreeSet<>();
         String fileName;
+
         while (!(fileName = bufferedReader.readLine()).equals("end"))
         {
-            int partStartIndex = Integer.parseInt(String.valueOf(fileName.lastIndexOf(".part")));
-            int partNumber = Integer.parseInt(fileName.substring(partStartIndex + 5));
-            fileList.set(partNumber - 1, fileName);
+
+            fileList.add(fileName);
         }
         bufferedReader.close();
 
-        FileWriter fileWriter = new FileWriter("C:\\DEVELOP\\tmp\\лекции по тестированию.part11.rar");
-                //fileName.substring(0, Integer.parseInt(String.valueOf(fileName.lastIndexOf(".part")))));
-        ListIterator<String> iter = fileList.listIterator();
+        int partStartIndex = Integer.parseInt(String.valueOf(fileList.first().lastIndexOf(".part")));
+        String fileOut = fileList.first().substring(0, partStartIndex);
 
-        while (iter.hasNext()){
-            FileReader fileReader = new FileReader(iter.next());
-           int counter;
+        BufferedWriter fileWriter = new BufferedWriter(new FileWriter(fileOut));
+        Iterator<String> iter = fileList.iterator();
+        while (iter.hasNext())
+        {
+            BufferedReader fileReader = new BufferedReader(new FileReader(iter.next()));
+            int counter;
             while ((counter = fileReader.read()) != -1)
             {
                 fileWriter.write(counter);
             }
             fileReader.close();
+
         }
         fileWriter.close();
-
     }
 }
-//C:\DEVELOP\tmp\лекции по тестированию.part11
-/*
-C:\DEVELOP\tmp\лекции по тестированию.part11
-        C:\DEVELOP\tmp\лекции по тестированию.part10
-        C:\DEVELOP\tmp\лекции по тестированию.part09
-        C:\DEVELOP\tmp\лекции по тестированию.part08
-        C:\DEVELOP\tmp\лекции по тестированию.part07
-        C:\DEVELOP\tmp\лекции по тестированию.part06
-        C:\DEVELOP\tmp\лекции по тестированию.part05
-        C:\DEVELOP\tmp\лекции по тестированию.part04
-        C:\DEVELOP\tmp\лекции по тестированию.part03
-        C:\DEVELOP\tmp\лекции по тестированию.part02
-        C:\DEVELOP\tmp\лекции по тестированию.part01*/
+
