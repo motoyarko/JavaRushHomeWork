@@ -1,8 +1,7 @@
 package com.javarush.test.level18.lesson10.home08;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /* Нити и байты
 Читайте с консоли имена файлов, пока не будет введено слово "exit"
@@ -19,50 +18,55 @@ public class Solution
     public static void main(String[] args) throws IOException
     {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        String fileName;
-        while (!(fileName = bufferedReader.readLine()).equals("exit"))
+        String inputFromConsole;
+        while (!(inputFromConsole = bufferedReader.readLine()).equals("exit"))
         {
-            new ReadThread(fileName).start();
+            ReadThread readThread = new ReadThread(inputFromConsole);
+            readThread.start();
         }
         bufferedReader.close();
+
+
     }
 
     public static class ReadThread extends Thread
     {
-        private final String fileName;
+        private String fileName;
 
         public ReadThread(String fileName)
         {
             this.fileName = fileName;
         }
 
-        @Override
         public void run()
         {
+
             try
             {
-                FileReader fileReader = new FileReader(fileName);
-                int maxValue = 0, maxKey = 0;
-                Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-                int counter;
-                while ((counter = fileReader.read()) != -1)
+                FileInputStream fileReader = new FileInputStream(this.fileName);
+                Map<Integer, Integer> map = new HashMap<>();
+                int input;
+                while ((input = fileReader.read()) != -1)
                 {
-                    if (map.containsKey(counter))
+                    if (map.containsKey(input))
                     {
-                        int tempValue = map.get(counter);
-                        map.put(counter, tempValue + 1);
-                    } else map.put(counter, 1);
+                        int tempValue = map.get(input) + 1;
+                        map.put(input, tempValue);
+                    } else map.put(input, 1);
                 }
                 fileReader.close();
-                for (int count : map.keySet())
+                int maxByte = 0, maxValue = Integer.MIN_VALUE;
+                Iterator iterator = map.entrySet().iterator();
+                while (iterator.hasNext())
                 {
-                    if (map.get(count) > maxValue)
+                    Map.Entry<Integer, Integer> pair = (Map.Entry<Integer, Integer>) iterator.next();
+                    if (pair.getValue() > maxValue)
                     {
-                        maxValue = map.get(count);
-                        maxKey = count;
+                        maxValue = pair.getValue();
+                        maxByte = pair.getKey();
                     }
                 }
-                resultMap.put(fileName, maxKey);
+                resultMap.put(fileName, maxByte);
             }
             catch (FileNotFoundException e)
             {
@@ -72,6 +76,7 @@ public class Solution
             {
                 e.printStackTrace();
             }
+
         }
     }
 }
