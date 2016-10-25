@@ -103,7 +103,7 @@ public class Solution
 
             if (!lastline.isEmpty())
             {
-                fileWriter.write("\r\n" + outputString.toString().replaceAll( "\u0000", " "));
+                fileWriter.write("\r\n" + outputString.toString().replaceAll("\u0000", " "));
             } else fileWriter.write(outputString.toString().replaceAll("\u0000", " "));
             fileWriter.close();
         }
