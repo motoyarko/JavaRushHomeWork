@@ -22,7 +22,11 @@ id productName price quantity
 19847983Куртка для сноубордистов, разм10173.991234
 */
 
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
 
 public class Solution
 {
@@ -43,21 +47,47 @@ public class Solution
             String fileName = bufferedReader.readLine();
             bufferedReader.close();
 
+            FileWriter fileWriter1 = new FileWriter(fileName, true);
+            fileWriter1.close();
+
             String line;
+            String lastline = "";
             int maxID = 0;
             BufferedReader bufferedReader1 = new BufferedReader(new FileReader(fileName));
-
             while ((line = bufferedReader1.readLine()) != null)
             {
-                line = line.substring(0, 8).replaceAll("[^\\d]", "");
-                int currentID = Integer.parseInt(line);
+
+                String line1 = "";
+                int currentID = 0;
+                lastline = line;
+
+                if (line.length() > 0)
+                {
+                    if ((line.indexOf(" ") > 0) && (line.indexOf(" ") < 7))
+                    {
+                        line1 = line.substring(0, line.indexOf(" "));
+                    } else
+                    {
+                        line1 = line.substring(0, 8);
+                    }
+                }
+                try
+                {
+                    currentID = Integer.parseInt(line1);
+                }
+                catch (NumberFormatException e)
+                {
+
+                }
+
                 maxID = (maxID > currentID) ? maxID : currentID;
             }
+
+
             bufferedReader1.close();
             int id = ++maxID;
 
-            FileWriter fileWriter = new FileWriter(fileName, true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
             StringBuffer outputString = new StringBuffer();
             StringBuffer productNameStringBuffer = new StringBuffer();
             productNameStringBuffer.append(productName).setLength(30);
@@ -68,10 +98,14 @@ public class Solution
             StringBuffer quantityStringBuffer = new StringBuffer();
             quantityStringBuffer.append(quantity).setLength(4);
 
+            FileWriter fileWriter = new FileWriter(fileName, true);
             outputString.append(idStringBuffer).append(productNameStringBuffer).append(priceStringBuffer).append(quantityStringBuffer);
-            bufferedWriter.write("\r\n");
-            bufferedWriter.write(outputString.toString());
-            bufferedWriter.close();
+
+            if (!lastline.isEmpty())
+            {
+                fileWriter.write("\r\n" + outputString.toString().replaceAll( "\u0000", " "));
+            } else fileWriter.write(outputString.toString().replaceAll("\u0000", " "));
+            fileWriter.close();
         }
     }
 }
