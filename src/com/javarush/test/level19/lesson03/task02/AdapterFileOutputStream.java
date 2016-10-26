@@ -19,19 +19,19 @@ public class AdapterFileOutputStream implements AmigoStringWriter
     @Override
     public void flush() throws IOException
     {
-fileOutputStream.flush();
+        fileOutputStream.flush();
     }
 
     @Override
     public void writeString(String s) throws IOException
     {
-fileOutputStream.write(s.getBytes());
+        fileOutputStream.write(s.getBytes());
     }
 
     @Override
     public void close() throws IOException
     {
-fileOutputStream.close();
+        fileOutputStream.close();
     }
 }
 
