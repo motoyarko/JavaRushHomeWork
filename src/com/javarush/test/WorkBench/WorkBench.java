@@ -8,7 +8,7 @@ public class WorkBench
     public static void main(String[] args){
 
 
-        String phone = "";
+        String phone = "+38(050)123-45-67";
         String code = "38";
         while (phone.length() < 10)
         {
@@ -40,7 +40,7 @@ public class WorkBench
         String fourthPart = phoneNumber.substring(8);
 
         System.out.println("+" + code + "(" + firstPart + ")" + secondPart + "-" + thirdPart + "-" +fourthPart);
-
+        System.out.println("callto://+" +  phone.replaceAll("\\D",""));
 
 
 
