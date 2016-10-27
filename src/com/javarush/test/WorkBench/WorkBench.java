@@ -8,6 +8,10 @@ public class WorkBench
     public static void main(String[] args){
 
 
+        C:\DEVELOP\test.txt
+
+
+
         String phone = "+38(050)123-45-67";
         String code = "38";
         while (phone.length() < 10)
