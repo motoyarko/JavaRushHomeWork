@@ -11,10 +11,12 @@ package com.javarush.test.level19.lesson08.task02;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class Solution {
+public class Solution
+{
     public static TestString testString = new TestString();
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         PrintStream originSystemOut = System.out;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream tempPrintStream = new PrintStream(outputStream);
@@ -30,9 +32,11 @@ public class Solution {
 
     }
 
-    public static class TestString {
-        public void printSomething() {
+    public static class TestString
+    {
+        public void printSomething()
+        {
             System.out.println("it's a text for testing");
-    }
+        }
     }
 }
