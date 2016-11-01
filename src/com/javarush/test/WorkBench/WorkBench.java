@@ -1,5 +1,7 @@
 package com.javarush.test.WorkBench;
 
+import java.util.HashMap;
+
 /**
  * Created by antonenko on 10/26/2016.
  */
@@ -8,6 +10,11 @@ public class WorkBench
     public static void main(String[] args){
 
 
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(1, 1);
+        map.put(2, 2);
+
+        map.containsValue(123);
 
 
 
