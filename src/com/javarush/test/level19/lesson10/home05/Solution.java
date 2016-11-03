@@ -11,7 +11,8 @@ import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Solution {
+public class Solution
+{
     public static void main(String[] args) throws IOException
     {
         String fileName1 = args[0];
@@ -21,11 +22,13 @@ public class Solution {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName2));
         Pattern pattern = Pattern.compile("[0-9]+");
 
-        while (bufferedReader.ready()){
+        while (bufferedReader.ready())
+        {
             String[] inputString = bufferedReader.readLine().split(" ");
-            for (String stringIterator: inputString){
+            for (String stringIterator : inputString)
+            {
                 Matcher matcher = pattern.matcher(stringIterator);
-                if (matcher.find())bufferedWriter.write(stringIterator + " ");
+                if (matcher.find()) bufferedWriter.write(stringIterator + " ");
             }
 
         }
